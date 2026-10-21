@@ -6,7 +6,7 @@ import {
     set,
     remove,
     child,
-    uptade
+    update
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
 
 const registrationRef = ref(database, "registrations");
@@ -18,15 +18,15 @@ export async function save(name, age, petName, petType) {
 
 export async function edit(id, name, age, petName, petType) {
     const itemRef = child(registrationRef, id);
-    await uptade(itemRef, {name, age,petName, petType});
+    await update(itemRef, {name, age,petName, petType});
 }
 
-export async function remove(id) {
+export async function removeData(id) {
     const itemRef = child(registrationRef, id);
     await remove(itemRef);
 }
 
-export async function searchAll(params) {
+export async function searchAll() {
     const snapshot = await get(registrationRef);
     return snapshot.exists() ? snapshot.val() : {};
 }
